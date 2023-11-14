@@ -1,4 +1,4 @@
----@diagnostic disable: need-check-nil, undefined-field
+---@diagnostic disable: need-check-nil, undefined-field, param-type-mismatch
 local utils = require("fast-snip.lib.utils")
 local format_session = require("fast-snip.lib.format-session").FormatSession
 
