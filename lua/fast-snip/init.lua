@@ -60,21 +60,21 @@ M.finalize_snippet = function()
 	-- create snippet
 	local file_type = vim.bo.ft
 	vim.ui.input({ prompt = "Enter trigger word: " }, function(trigger)
-		if trigger then
-			current_session:set_trigger(trigger)
-			local snippet_string = current_session:produce_final_snippet()
-			local info, log_level = utils.write_snippet_to_file(
-				snippets_dir,
-				template_file_path,
-				defaults_options.regex,
-				file_type,
-				snippet_string
-			)
-			current_session = nil
-			utils.notify(info, log_level)
-		else
+		if not trigger then
 			utils.notify(utils.info.trigger_empty_error, vim.log.levels.ERROR)
+			return
 		end
+		current_session:set_trigger(trigger)
+		local snippet_string = current_session:produce_final_snippet()
+		local info, log_level = utils.write_snippet_to_file(
+			snippets_dir,
+			template_file_path,
+			defaults_options.regex,
+			file_type,
+			snippet_string
+		)
+		current_session = nil
+		utils.notify(info, log_level)
 	end)
 end
 

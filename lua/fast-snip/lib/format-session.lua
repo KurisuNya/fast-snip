@@ -1,6 +1,6 @@
 local lib_selection = require("fast-snip.lib.visual-selection")
 local lib_strings = require("fast-snip.lib.strings")
-local fmt = require("fast-snip.lib.fmt")
+local format = require("fast-snip.lib.format")
 
 local M = {}
 
@@ -121,7 +121,7 @@ end
 function M.FormatSession:produce_final_snippet()
 	local snippet_body = self:produce_snippet_body()
 	local snippet_nodes = table.concat(self:produce_snippet_nodes(), "\n")
-	local final_snippet = fmt(self.snippet_skeleton, {
+	local final_snippet = format(self.snippet_skeleton, {
 		trigger = self.trigger,
 		body = snippet_body,
 		nodes = snippet_nodes,
