@@ -1,3 +1,4 @@
+---@diagnostic disable: cast-local-type
 local lib_strings = require("fast-snip.lib.strings")
 
 local M = {}

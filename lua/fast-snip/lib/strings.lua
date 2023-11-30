@@ -1,3 +1,4 @@
+---@diagnostic disable: cast-local-type, undefined-field
 local Table = require("fast-snip.lib.table")
 local String = {}
 
@@ -7,29 +8,29 @@ local String = {}
 ---@param input string
 ---@return table
 local get_new_line_positions = function(input)
-	local new_line_positons = { 0 }
+	local new_line_positions = { 0 }
 
 	local first = 0
 	while true do
 		first = input:find("\n", first + 1)
-		table.insert(new_line_positons, first)
+		table.insert(new_line_positions, first)
 		if not first then
 			break
 		end
 	end
 
-	return new_line_positons
+	return new_line_positions
 end
 
 ---@param input string
 ---@param range table: `{start row, start col, end row, end col}`
 ---@return table: `{start position, end position}`
 String.convert_4d_range_to_2d_range = function(input, range)
-	local new_line_positons = get_new_line_positions(input)
+	local new_line_positions = get_new_line_positions(input)
 	local start_row, start_col, end_row, end_col = unpack(range)
 
-	local start_pos = new_line_positons[start_row] + start_col
-	local end_pos = new_line_positons[end_row] + end_col
+	local start_pos = new_line_positions[start_row] + start_col
+	local end_pos = new_line_positions[end_row] + end_col
 
 	return { start_pos, end_pos }
 end
